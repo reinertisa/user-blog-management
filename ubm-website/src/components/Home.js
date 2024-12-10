@@ -9,9 +9,13 @@ export default function Home() {
         {title: 'Company tech stack project', body: 'This is professional', author: 'Kristi Reinert', id: 3},
     ]);
 
+    const handleDelete = (id) => {
+        setBlogs(blogs.filter(blog => blog?.id !== id));
+    }
+
     return (
         <div className="home">
-            <BlogList title="All Blogs" blogs={blogs} />
+            <BlogList title="All Blogs" blogs={blogs} onDelete={handleDelete}/>
         </div>
     )
 }
