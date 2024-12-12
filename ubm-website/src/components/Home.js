@@ -1,13 +1,20 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import BlogList from "./BlogList";
 
 export default function Home() {
 
-    const [blogs, setBlogs] = useState([
-        {title: 'Student university class project', body: 'Bla Bla Bla...', author: 'Isa Reinert', id: 1},
-        {title: 'Blog project management project', body: 'Hey dude', author: 'Sade Miller', id: 2},
-        {title: 'Company tech stack project', body: 'This is professional', author: 'Kristi Reinert', id: 3},
-    ]);
+    const [blogs, setBlogs] = useState(null);
+
+    useEffect(() => {
+        const loadData = async () => {
+            const rez = await fetch('http://localhost:8080/api/v1/blogs');
+            const data = await rez.json();
+            setBlogs(data);
+        }
+
+        loadData();
+
+    }, []);
 
     const handleDelete = (id) => {
         setBlogs(blogs.filter(blog => blog?.id !== id));
@@ -15,7 +22,7 @@ export default function Home() {
 
     return (
         <div className="home">
-            <BlogList title="All Blogs" blogs={blogs} onDelete={handleDelete}/>
+            {blogs && <BlogList title="All Blogs" blogs={blogs} onDelete={handleDelete}/>}
         </div>
     )
 }
