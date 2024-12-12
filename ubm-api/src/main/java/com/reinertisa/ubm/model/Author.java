@@ -192,6 +192,6 @@ public class Author implements Comparable<Author> {
 
     @Override
     public int compareTo(Author o) {
-        return 0;
+        return this.getId().compareTo(o.getId());
     }
 }

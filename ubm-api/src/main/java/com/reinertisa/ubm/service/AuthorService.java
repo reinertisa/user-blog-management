@@ -1,14 +1,17 @@
 package com.reinertisa.ubm.service;
 
 import com.reinertisa.ubm.model.Author;
+import com.reinertisa.ubm.model.AuthorDto;
+import com.reinertisa.ubm.model.AuthorRequest;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
 public interface AuthorService {
 
-    List<Author> getAllAuthors();
+    List<AuthorDto> getAllAuthors();
 
-    Author createAuthor(Author author);
+    AuthorDto createAuthor(@Valid AuthorRequest authorRequest);
 
     void deleteAuthor(Long id);
 

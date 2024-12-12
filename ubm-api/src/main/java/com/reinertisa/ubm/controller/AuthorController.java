@@ -1,8 +1,10 @@
 package com.reinertisa.ubm.controller;
 
 
-import com.reinertisa.ubm.model.Author;
+import com.reinertisa.ubm.model.AuthorDto;
+import com.reinertisa.ubm.model.AuthorRequest;
 import com.reinertisa.ubm.service.AuthorServiceImpl;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,22 +15,23 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/authors")
+@CrossOrigin(origins = "*")
 public class AuthorController {
 
     private final AuthorServiceImpl authorService;
 
     @GetMapping
-    public ResponseEntity<List<Author>> getAllAuthors() {
+    public ResponseEntity<List<AuthorDto>> getAllAuthors() {
 
-        List<Author> authors = authorService.getAllAuthors();
+        List<AuthorDto> authors = authorService.getAllAuthors();
         return ResponseEntity.status(HttpStatus.OK).body(authors);
     }
 
     @PostMapping
-    public ResponseEntity<Author> createAuthor(@RequestBody Author author) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(authorService.createAuthor(author));
+    public ResponseEntity<AuthorDto> createAuthor(@RequestBody @Valid AuthorRequest authorRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(authorService.createAuthor(authorRequest));
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAuthor(@PathVariable("id") Long id) {
