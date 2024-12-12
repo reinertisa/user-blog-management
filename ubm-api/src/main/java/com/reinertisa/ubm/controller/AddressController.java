@@ -1,6 +1,7 @@
 package com.reinertisa.ubm.controller;
 
-import com.reinertisa.ubm.model.Address;
+import com.reinertisa.ubm.model.AddressDto;
+import com.reinertisa.ubm.model.AddressRequest;
 import com.reinertisa.ubm.service.AddressServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,14 +17,14 @@ public class AddressController {
     private final AddressServiceImpl addressService;
 
     @GetMapping
-    public ResponseEntity<List<Address>> getAllAddresses() {
-        List<Address> addresses = addressService.getAllAddresses();
+    public ResponseEntity<List<AddressDto>> getAllAddresses() {
+        List<AddressDto> addresses = addressService.getAllAddresses();
         return ResponseEntity.status(HttpStatus.OK).body(addresses);
     }
 
     @PostMapping
-    public ResponseEntity<Address> createAddress(@RequestBody Address address) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(addressService.createAddress(address));
+    public ResponseEntity<AddressDto> createAddress(@RequestBody AddressRequest addressReques) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(addressService.createAddress(addressReques));
     }
 
     @DeleteMapping("/{id}")

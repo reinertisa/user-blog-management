@@ -23,7 +23,7 @@ public class Address {
 
     @JsonBackReference
     @OneToOne(targetEntity = Author.class,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+            cascade = CascadeType.ALL)
     @JoinColumn(name = "authorId", referencedColumnName = "id", nullable = false, foreignKey = @ForeignKey(name = "Addresses_FK1"))
     private Author author;
 
