@@ -69,6 +69,6 @@ public class Blog implements Comparable<Blog> {
 
     @Override
     public int compareTo(Blog o) {
-        return 0;
+        return this.getTitle().compareTo(o.getTitle());
     }
 }
