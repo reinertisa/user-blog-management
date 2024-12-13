@@ -28,7 +28,7 @@ export default function BlogForm() {
             body: JSON.stringify(blog)
         });
         setLoading(false);
-        navigate('/');
+        navigate('/blogs');
 
     }
 

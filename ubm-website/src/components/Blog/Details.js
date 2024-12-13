@@ -11,7 +11,7 @@ export default function BlogDetails() {
             await fetch(`http://localhost:8080/api/v1/blogs/${id}`, {
                 method: 'DELETE',
             })
-            navigate('/');
+            navigate('/blogs');
         } catch (err) {
             console.log(err);
         }

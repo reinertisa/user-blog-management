@@ -1,6 +1,6 @@
 import {Link} from "react-router";
 
-export default function List({title, blogs}) {
+export default function BlogList({title, blogs}) {
     return (
         <div className="blog-list">
             <h2>{title}</h2>
