@@ -28,6 +28,17 @@ public class BlogController {
         return ResponseEntity.status(HttpStatus.OK).body(blogs);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<BlogDto> getBlogById(@PathVariable("id") Long id) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(blogService.getBlogById(id));
+        } catch (ResourceNotFoundException ex) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage(), ex);
+        } catch(Exception ex) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
+        }
+    }
+
     @PostMapping
     public ResponseEntity<BlogDto> createBlog(@RequestBody BlogRequest blogRequest) {
         try {
@@ -40,7 +51,6 @@ public class BlogController {
 
     }
 
-    @PostMapping("/author/")
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBlog(@PathVariable("id") Long id) {

@@ -12,12 +12,15 @@ import jakarta.validation.Valid;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @RequiredArgsConstructor
 @Service
+@CrossOrigin(origins = "*")
 public class BlogServiceImpl implements BlogService {
 
     private final BlogRepository blogRepository;
@@ -34,6 +37,22 @@ public class BlogServiceImpl implements BlogService {
                         blog.getAuthor().getEmail()
                 ))
                 .toList();
+    }
+
+    @Override
+    public BlogDto getBlogById(Long id) throws ResourceNotFoundException{
+        Objects.requireNonNull(id, "Id should not be null");
+        Blog blog = blogRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Blog not found for this ID: " + id));
+
+        return new BlogDto(
+                blog.getId(),
+                blog.getTitle(),
+                blog.getContent(),
+                blog.getAuthor().getFirstName(),
+                blog.getAuthor().getEmail()
+        );
+
     }
 
     @Override @Transactional
@@ -58,6 +77,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override @Transactional
     public void deleteBlog(Long id) {
-        blogRepository.findById(id).ifPresent(blogRepository::delete);
+        blogRepository.findById(id)
+                .ifPresent(blogRepository::delete);
     }
 }
