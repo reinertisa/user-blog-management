@@ -1,8 +1,10 @@
 import Navbar from "./components/Navbar";
-import Index from "./components/Blog";
+import BlogPage from "./components/Blog";
 import {BrowserRouter,  Route, Routes} from "react-router";
 import BlogForm from "./components/Blog/Form";
 import BlogDetails from "./components/Blog/Details";
+import AuthorForm from "./components/Author/Form";
+import AuthorPage from "./components/Author";
 
 function App() {
   return (
@@ -11,8 +13,11 @@ function App() {
               <Navbar/>
               <div className="content">
                   <Routes>
-                      <Route path="/" element={<Index />} />
-                      <Route path="/create" element={<BlogForm />} />
+                      <Route path="/" element={<div>Home</div>} />
+                      <Route path="/blogs" element={<BlogPage />} />
+                      <Route path="/createBlog" element={<BlogForm />} />
+                      <Route path="/authors" element={<AuthorPage />} />
+                      <Route path="/createAuthor" element={<AuthorForm />} />
                       <Route path="/blogs/:id" element={<BlogDetails />} />
                   </Routes>
               </div>
