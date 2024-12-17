@@ -4,7 +4,6 @@ import com.reinertisa.ubm.model.Address;
 import com.reinertisa.ubm.model.Author;
 import com.reinertisa.ubm.model.AuthorDto;
 import com.reinertisa.ubm.model.AuthorRequest;
-import com.reinertisa.ubm.repository.AddressRepository;
 import com.reinertisa.ubm.repository.AuthorRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
