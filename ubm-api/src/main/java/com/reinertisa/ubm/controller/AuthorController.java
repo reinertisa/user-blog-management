@@ -2,6 +2,7 @@ package com.reinertisa.ubm.controller;
 
 
 import com.reinertisa.ubm.model.AuthorDto;
+import com.reinertisa.ubm.model.AuthorNameOptions;
 import com.reinertisa.ubm.model.AuthorRequest;
 import com.reinertisa.ubm.service.AuthorService;
 import jakarta.validation.Valid;
@@ -27,6 +28,15 @@ public class AuthorController {
     public ResponseEntity<List<AuthorDto>> getAllAuthors() {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(authorService.getAllAuthors());
+        } catch (Exception ex) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
+        }
+    }
+
+    @GetMapping("/options")
+    public ResponseEntity<List<AuthorNameOptions>> getAllAuthorNames() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(authorService.getAllAuthorNames());
         } catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
         }

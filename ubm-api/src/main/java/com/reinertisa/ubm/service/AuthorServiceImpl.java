@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +23,21 @@ public class AuthorServiceImpl implements AuthorService {
     public List<AuthorDto> getAllAuthors() {
         List<Author> authors = authorRepository.findAll();
         return authorMapper.toDtoListFromEntityList(authors);
+    }
+
+    @Override
+    public List<AuthorNameOptions> getAllAuthorNames() {
+        List<Object[]> authorNames = authorRepository.findAllAuthorNames();
+        List<AuthorNameOptions> authorNameOptions = new ArrayList<>();
+
+        for (Object[] objects : authorNames) {
+            Long id = Long.parseLong(objects[0].toString());
+            String firstName = objects[1].toString();
+            String lastName = objects[2].toString();
+            AuthorNameOptions options = new AuthorNameOptions(id, firstName + " " + lastName);
+            authorNameOptions.add(options);
+        }
+        return authorNameOptions;
     }
 
     @Override @Transactional
