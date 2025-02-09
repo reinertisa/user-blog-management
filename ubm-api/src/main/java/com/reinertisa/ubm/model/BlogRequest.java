@@ -1,20 +1,51 @@
 package com.reinertisa.ubm.model;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.constraints.NotNull;
 
-@Getter @Setter
+
 public class BlogRequest {
 
-    @NotBlank(message = "This field is required.")
-    @Email(message = "Invalid email. Please type a valid email")
-    private String email;
+    private Long blogId;
+
+    @NotNull(message = "This field is required.")
+    private long authorId;
 
     @NotBlank(message = "This field is required.")
     private String title;
 
     @NotBlank(message = "This field is required.")
     private String content;
+
+    public Long getBlogId() {
+        return blogId;
+    }
+
+    public void setBlogId(Long blogId) {
+        this.blogId = blogId;
+    }
+
+    public long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(long authorId) {
+        this.authorId = authorId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }

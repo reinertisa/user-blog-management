@@ -22,7 +22,12 @@ public class Blog implements Comparable<Blog> {
     @ManyToOne(targetEntity = Author.class,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},
             fetch = FetchType.LAZY)
-    @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = false, foreignKey = @ForeignKey(name = "Blogs_FK1"))
+    @JoinColumn(
+            name = "author_id",
+            referencedColumnName = "id",
+            nullable = false,
+            foreignKey = @ForeignKey(name = "Blogs_FK1")
+    )
     private Author author;
 
     public Long getId() {
