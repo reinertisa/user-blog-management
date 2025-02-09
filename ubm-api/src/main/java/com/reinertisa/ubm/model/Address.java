@@ -10,7 +10,7 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name = "city")
     private String city;
@@ -22,16 +22,22 @@ public class Address {
     private String country;
 
     @JsonBackReference
-    @OneToOne(targetEntity = Author.class,
+    @OneToOne(
+            targetEntity = Author.class,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinColumn(name = "authorId", referencedColumnName = "id", nullable = false, foreignKey = @ForeignKey(name = "Addresses_FK1"))
+    @JoinColumn(
+            name = "authorId",
+            referencedColumnName = "id",
+            nullable = false,
+            foreignKey = @ForeignKey(name = "Addresses_FK1")
+    )
     private Author author;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

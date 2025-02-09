@@ -2,29 +2,38 @@ package com.reinertisa.ubm.controller;
 
 import com.reinertisa.ubm.model.AddressDto;
 import com.reinertisa.ubm.model.AddressRequest;
-import com.reinertisa.ubm.service.AddressServiceImpl;
-import lombok.RequiredArgsConstructor;
+import com.reinertisa.ubm.service.AddressService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-@RequiredArgsConstructor
+
 @RestController
 @RequestMapping("/api/v1/addresses")
+@CrossOrigin(origins = "*")
 public class AddressController {
-    private final AddressServiceImpl addressService;
+    private final AddressService addressService;
+
+    public AddressController(AddressService addressService) {
+        this.addressService = addressService;
+    }
 
     @GetMapping
     public ResponseEntity<List<AddressDto>> getAllAddresses() {
-        List<AddressDto> addresses = addressService.getAllAddresses();
-        return ResponseEntity.status(HttpStatus.OK).body(addresses);
+        try {
+            List<AddressDto> addresses = addressService.getAllAddresses();
+            return ResponseEntity.status(HttpStatus.OK).body(addresses);
+        } catch (Exception ex) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
+        }
     }
 
     @PostMapping
-    public ResponseEntity<AddressDto> createAddress(@RequestBody AddressRequest addressReques) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(addressService.createAddress(addressReques));
+    public ResponseEntity<AddressDto> createAddress(@RequestBody AddressRequest addressRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(addressService.createAddress(addressRequest));
     }
 
     @DeleteMapping("/{id}")
@@ -32,6 +41,4 @@ public class AddressController {
         addressService.deleteAddress(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
-
-
 }

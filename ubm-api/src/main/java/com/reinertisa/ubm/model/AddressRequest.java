@@ -1,11 +1,10 @@
 package com.reinertisa.ubm.model;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter @Setter
 public class AddressRequest {
+
+    private long addressId;
 
     @NotBlank(message = "This field is required.")
     private String city;
@@ -15,4 +14,36 @@ public class AddressRequest {
 
     @NotBlank(message = "This field is required.")
     private String country;
+
+    public long getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(long addressId) {
+        this.addressId = addressId;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
 }
