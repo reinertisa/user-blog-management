@@ -1,0 +1,35 @@
+package com.reinertisa.ubm.model;
+
+public class AuthorNameOptions {
+    private Long value;
+    private String label;
+
+    public AuthorNameOptions(Long value, String label) {
+        this.value = value;
+        this.label = label;
+    }
+
+    public Long getValue() {
+        return value;
+    }
+
+    public void setValue(Long value) {
+        this.value = value;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    @Override
+    public String toString() {
+        return "AuthorNameOptions{" +
+                "value=" + value +
+                ", label='" + label + '\'' +
+                '}';
+    }
+}
