@@ -49,7 +49,6 @@ public class Author implements Comparable<Author> {
     )
     private Address address;
 
-
     @JsonManagedReference //Prevents recursion in retrieve requests
     @OneToMany(
             targetEntity = Blog.class,

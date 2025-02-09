@@ -3,34 +3,42 @@ package com.reinertisa.ubm.controller;
 
 import com.reinertisa.ubm.model.AuthorDto;
 import com.reinertisa.ubm.model.AuthorRequest;
-import com.reinertisa.ubm.service.AuthorServiceImpl;
+import com.reinertisa.ubm.service.AuthorService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/authors")
 @CrossOrigin(origins = "*")
 public class AuthorController {
 
-    private final AuthorServiceImpl authorService;
+    private final AuthorService authorService;
 
-    @GetMapping
-    public ResponseEntity<List<AuthorDto>> getAllAuthors() {
-
-        List<AuthorDto> authors = authorService.getAllAuthors();
-        return ResponseEntity.status(HttpStatus.OK).body(authors);
+    public AuthorController(AuthorService authorService) {
+        this.authorService = authorService;
     }
 
-    @PostMapping
+    @GetMapping("")
+    public ResponseEntity<List<AuthorDto>> getAllAuthors() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(authorService.getAllAuthors());
+        } catch (Exception ex) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
+        }
+    }
+
+    @PostMapping("")
     public ResponseEntity<AuthorDto> createAuthor(@RequestBody @Valid AuthorRequest authorRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(authorService.createAuthor(authorRequest));
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(authorService.createAuthor(authorRequest));
+        } catch (Exception ex) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
+        }
     }
 
     @DeleteMapping("/{id}")
