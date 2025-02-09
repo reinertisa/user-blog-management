@@ -11,7 +11,6 @@ export default function AuthorForm() {
     const [country, setCountry] = useState('');
 
     const handleSubmit = async (evt) => {
-        console.log('event', evt);
         evt.preventDefault();
         evt.stopPropagation();
 
@@ -21,13 +20,12 @@ export default function AuthorForm() {
             email,
             dob,
             gender,
-           address: {
+           addressRequest: {
                city,
                state,
                country,
            }
         }
-        console.log(body);
         const rez = await fetch('http://localhost:8080/api/v1/authors', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
