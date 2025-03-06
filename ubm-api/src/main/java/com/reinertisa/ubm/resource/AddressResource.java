@@ -14,10 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/addresses")
 @CrossOrigin(origins = "*")
-public class AddressController {
+public class AddressResource {
     private final AddressService addressService;
 
-    public AddressController(AddressService addressService) {
+    public AddressResource(AddressService addressService) {
         this.addressService = addressService;
     }
 

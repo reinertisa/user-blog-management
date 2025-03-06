@@ -16,11 +16,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/blogs")
 @CrossOrigin(origins = "*")
-public class BlogController {
+public class BlogResource {
 
     private final BlogService blogService;
 
-    public BlogController(BlogService blogService) {
+    public BlogResource(BlogService blogService) {
         this.blogService = blogService;
     }
 
