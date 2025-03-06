@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public class AddressRequest {
 
-    private long addressId;
+    private Long addressId;
 
     @NotBlank(message = "This field is required.")
     private String city;
@@ -15,11 +15,11 @@ public class AddressRequest {
     @NotBlank(message = "This field is required.")
     private String country;
 
-    public long getAddressId() {
+    public Long getAddressId() {
         return addressId;
     }
 
-    public void setAddressId(long addressId) {
+    public void setAddressId(Long addressId) {
         this.addressId = addressId;
     }
 

@@ -2,15 +2,13 @@ package com.reinertisa.ubm.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "addresses")
-public class AddressEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+public class AddressEntity extends Auditable {
 
     @Column(name = "city")
     private String city;
@@ -32,14 +30,6 @@ public class AddressEntity {
             foreignKey = @ForeignKey(name = "Addresses_FK1")
     )
     private AuthorEntity author;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getCity() {
         return city;
@@ -77,7 +67,6 @@ public class AddressEntity {
     @Override
     public String toString() {
         return "AddressEntity{" +
-                "id=" + id +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", country='" + country + '\'' +
