@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
+@Transactional(rollbackOn = Exception.class)
 public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepository authorRepository;
     private final AuthorMapper authorMapper;
@@ -45,9 +47,10 @@ public class AuthorServiceImpl implements AuthorService {
         return authorNameOptions;
     }
 
-    @Override @Transactional
+    @Override
     public AuthorDto createAuthor(@Valid AuthorRequest authorRequest) {
         AuthorEntity authorEntity = authorMapper.toEntityFromRequest(authorRequest);
+        authorEntity.setAuthorId(UUID.randomUUID().toString());
         AddressEntity addressEntity = authorEntity.getAddress();
         addressEntity.setAuthor(authorEntity);
 
@@ -55,7 +58,7 @@ public class AuthorServiceImpl implements AuthorService {
         return authorMapper.toDtoFromEntity(authorEntity);
     }
 
-    @Override @Transactional
+    @Override
     public void deleteAuthor(Long id) {
         authorRepository.findById(id).ifPresent(authorRepository::delete);
     }

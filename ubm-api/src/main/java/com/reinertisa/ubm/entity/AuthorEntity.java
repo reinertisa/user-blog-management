@@ -1,5 +1,6 @@
 package com.reinertisa.ubm.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.reinertisa.ubm.enumaration.Gender;
 import jakarta.persistence.*;
@@ -10,11 +11,11 @@ import java.util.*;
 
 @Entity
 @Table(name = "authors")
-public class AuthorEntity implements Comparable<AuthorEntity> {
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+public class AuthorEntity extends Auditable implements Comparable<AuthorEntity> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(updatable = false, unique = false, nullable = false)
+    private String authorId;
 
     @Column(name = "firstName")
     private String firstName;
@@ -22,7 +23,7 @@ public class AuthorEntity implements Comparable<AuthorEntity> {
     @Column(name = "lastName")
     private String lastName;
 
-    @Column(name = "email")
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Column(name = "dob")
@@ -35,12 +36,6 @@ public class AuthorEntity implements Comparable<AuthorEntity> {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(name = "createdBy")
-    private LocalDate createdBy;
-
-    @Column(name = "updateBy")
-    private LocalDate updatedBy;
-
     @JsonManagedReference //Prevents recursion in retrieve requests
     @OneToOne(
             targetEntity = AddressEntity.class,
@@ -48,7 +43,7 @@ public class AuthorEntity implements Comparable<AuthorEntity> {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private AddressEntity addressEntity;
+    private AddressEntity address;
 
     @JsonManagedReference //Prevents recursion in retrieve requests
     @OneToMany(
@@ -59,10 +54,10 @@ public class AuthorEntity implements Comparable<AuthorEntity> {
             orphanRemoval = true
     )
     @SortNatural
-    private SortedSet<BlogEntity> blogEntities = new TreeSet<>();
+    private SortedSet<BlogEntity> blogs = new TreeSet<>();
 
     public boolean addBlog(BlogEntity blogEntity) {
-        if (blogEntities.add(blogEntity)) {
+        if (blogs.add(blogEntity)) {
             blogEntity.setAuthor(this);
             return true;
         }
@@ -70,7 +65,7 @@ public class AuthorEntity implements Comparable<AuthorEntity> {
     }
 
     public boolean removeBlog(BlogEntity blogEntity) {
-        if (blogEntities.remove(blogEntity)) {
+        if (blogs.remove(blogEntity)) {
             blogEntity.setAuthor(null);
             return true;
         }
@@ -78,18 +73,18 @@ public class AuthorEntity implements Comparable<AuthorEntity> {
     }
 
     public void removeAllBlogs() {
-        for (BlogEntity blogEntity : blogEntities) {
+        for (BlogEntity blogEntity : blogs) {
             blogEntity.setAuthor(null);
         }
-        blogEntities.clear();
+        blogs.clear();
     }
 
-    public Long getId() {
-        return id;
+    public String getAuthorId() {
+        return authorId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
     }
 
     public String getFirstName() {
@@ -140,54 +135,21 @@ public class AuthorEntity implements Comparable<AuthorEntity> {
         this.gender = gender;
     }
 
-    public LocalDate getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(LocalDate createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public LocalDate getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(LocalDate updatedBy) {
-        this.updatedBy = updatedBy;
-    }
 
     public AddressEntity getAddress() {
-        return addressEntity;
+        return address;
     }
 
-    public void setAddress(AddressEntity addressEntity) {
-        this.addressEntity = addressEntity;
+    public void setAddress(AddressEntity address) {
+        this.address = address;
     }
 
     public SortedSet<BlogEntity> getBlogs() {
-        return blogEntities;
+        return blogs;
     }
 
-    public void setBlogs(SortedSet<BlogEntity> blogEntities) {
-        this.blogEntities = blogEntities;
-    }
-
-
-    @Override
-    public String toString() {
-        return "AuthorEntity{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", dob=" + dob +
-                ", age=" + age +
-                ", gender=" + gender +
-                ", createdBy=" + createdBy +
-                ", updatedBy=" + updatedBy +
-                ", addressEntity=" + addressEntity +
-                ", blogEntities=" + blogEntities +
-                '}';
+    public void setBlogEntities(SortedSet<BlogEntity> blogs) {
+        this.blogs = blogs;
     }
 
     @Override

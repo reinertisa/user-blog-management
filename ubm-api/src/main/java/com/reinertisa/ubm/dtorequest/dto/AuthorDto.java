@@ -3,6 +3,7 @@ package com.reinertisa.ubm.dtorequest.dto;
 import com.reinertisa.ubm.enumaration.Gender;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.SortedSet;
 
 
@@ -14,8 +15,8 @@ public class AuthorDto {
     private String email;
     private Integer age;
     private Gender gender;
-    private LocalDate createdBy;
-    private LocalDate updatedBy;
+    private Long createdBy;
+    private Long updatedBy;
     private AddressDto addressDto;
     private SortedSet<BlogDto> blogsDto;
 
@@ -67,19 +68,19 @@ public class AuthorDto {
         this.gender = gender;
     }
 
-    public LocalDate getCreatedBy() {
+    public Long getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(LocalDate createdBy) {
+    public void setCreatedBy(Long createdBy) {
         this.createdBy = createdBy;
     }
 
-    public LocalDate getUpdatedBy() {
+    public Long getUpdatedBy() {
         return updatedBy;
     }
 
-    public void setUpdatedBy(LocalDate updatedBy) {
+    public void setUpdatedBy(Long updatedBy) {
         this.updatedBy = updatedBy;
     }
 
