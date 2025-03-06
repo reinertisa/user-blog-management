@@ -1,6 +1,7 @@
-package com.reinertisa.ubm.model;
+package com.reinertisa.ubm.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.reinertisa.ubm.enumaration.Gender;
 import jakarta.persistence.*;
 import org.hibernate.annotations.SortNatural;
 
@@ -9,7 +10,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "authors")
-public class Author implements Comparable<Author> {
+public class AuthorEntity implements Comparable<AuthorEntity> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,45 +43,45 @@ public class Author implements Comparable<Author> {
 
     @JsonManagedReference //Prevents recursion in retrieve requests
     @OneToOne(
-            targetEntity = Address.class,
+            targetEntity = AddressEntity.class,
             mappedBy = "author",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private Address address;
+    private AddressEntity addressEntity;
 
     @JsonManagedReference //Prevents recursion in retrieve requests
     @OneToMany(
-            targetEntity = Blog.class,
+            targetEntity = BlogEntity.class,
             mappedBy = "author",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     @SortNatural
-    private SortedSet<Blog> blogs = new TreeSet<>();
+    private SortedSet<BlogEntity> blogEntities = new TreeSet<>();
 
-    public boolean addBlog(Blog blog) {
-        if (blogs.add(blog)) {
-            blog.setAuthor(this);
+    public boolean addBlog(BlogEntity blogEntity) {
+        if (blogEntities.add(blogEntity)) {
+            blogEntity.setAuthor(this);
             return true;
         }
         return false;
     }
 
-    public boolean removeBlog(Blog blog) {
-        if (blogs.remove(blog)) {
-            blog.setAuthor(null);
+    public boolean removeBlog(BlogEntity blogEntity) {
+        if (blogEntities.remove(blogEntity)) {
+            blogEntity.setAuthor(null);
             return true;
         }
         return false;
     }
 
     public void removeAllBlogs() {
-        for (Blog blog : blogs) {
-            blog.setAuthor(null);
+        for (BlogEntity blogEntity : blogEntities) {
+            blogEntity.setAuthor(null);
         }
-        blogs.clear();
+        blogEntities.clear();
     }
 
     public Long getId() {
@@ -155,26 +156,26 @@ public class Author implements Comparable<Author> {
         this.updatedBy = updatedBy;
     }
 
-    public Address getAddress() {
-        return address;
+    public AddressEntity getAddress() {
+        return addressEntity;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddress(AddressEntity addressEntity) {
+        this.addressEntity = addressEntity;
     }
 
-    public SortedSet<Blog> getBlogs() {
-        return blogs;
+    public SortedSet<BlogEntity> getBlogs() {
+        return blogEntities;
     }
 
-    public void setBlogs(SortedSet<Blog> blogs) {
-        this.blogs = blogs;
+    public void setBlogs(SortedSet<BlogEntity> blogEntities) {
+        this.blogEntities = blogEntities;
     }
 
 
     @Override
     public String toString() {
-        return "Author{" +
+        return "AuthorEntity{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -184,13 +185,13 @@ public class Author implements Comparable<Author> {
                 ", gender=" + gender +
                 ", createdBy=" + createdBy +
                 ", updatedBy=" + updatedBy +
-                ", address=" + address +
-                ", blogs=" + blogs +
+                ", addressEntity=" + addressEntity +
+                ", blogEntities=" + blogEntities +
                 '}';
     }
 
     @Override
-    public int compareTo(Author o) {
+    public int compareTo(AuthorEntity o) {
         return this.getId().compareTo(o.getId());
     }
 }

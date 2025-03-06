@@ -1,5 +1,6 @@
-package com.reinertisa.ubm.model;
+package com.reinertisa.ubm.dtorequest.request;
 
+import com.reinertisa.ubm.enumaration.Gender;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;

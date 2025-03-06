@@ -1,7 +1,7 @@
 package com.reinertisa.ubm.service;
 
-import com.reinertisa.ubm.model.AddressDto;
-import com.reinertisa.ubm.model.AddressRequest;
+import com.reinertisa.ubm.dtorequest.dto.AddressDto;
+import com.reinertisa.ubm.dtorequest.request.AddressRequest;
 import jakarta.validation.Valid;
 
 import java.util.List;

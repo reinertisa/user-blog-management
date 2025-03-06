@@ -1,4 +1,4 @@
-package com.reinertisa.ubm.model;
+package com.reinertisa.ubm.dtorequest.dto;
 
 
 public class AddressDto {

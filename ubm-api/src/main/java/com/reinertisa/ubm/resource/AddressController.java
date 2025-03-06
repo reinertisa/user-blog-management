@@ -1,7 +1,7 @@
-package com.reinertisa.ubm.controller;
+package com.reinertisa.ubm.resource;
 
-import com.reinertisa.ubm.model.AddressDto;
-import com.reinertisa.ubm.model.AddressRequest;
+import com.reinertisa.ubm.dtorequest.dto.AddressDto;
+import com.reinertisa.ubm.dtorequest.request.AddressRequest;
 import com.reinertisa.ubm.service.AddressService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

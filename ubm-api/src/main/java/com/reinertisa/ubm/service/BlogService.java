@@ -1,8 +1,8 @@
 package com.reinertisa.ubm.service;
 
 import com.reinertisa.ubm.exception.ResourceNotFoundException;
-import com.reinertisa.ubm.model.BlogDto;
-import com.reinertisa.ubm.model.BlogRequest;
+import com.reinertisa.ubm.dtorequest.dto.BlogDto;
+import com.reinertisa.ubm.dtorequest.request.BlogRequest;
 import jakarta.validation.Valid;
 
 import java.util.List;

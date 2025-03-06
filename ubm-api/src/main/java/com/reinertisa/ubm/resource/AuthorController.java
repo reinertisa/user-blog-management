@@ -1,9 +1,9 @@
-package com.reinertisa.ubm.controller;
+package com.reinertisa.ubm.resource;
 
 
-import com.reinertisa.ubm.model.AuthorDto;
-import com.reinertisa.ubm.model.AuthorNameOptions;
-import com.reinertisa.ubm.model.AuthorRequest;
+import com.reinertisa.ubm.dtorequest.dto.AuthorDto;
+import com.reinertisa.ubm.dtorequest.AuthorNameOptions;
+import com.reinertisa.ubm.dtorequest.request.AuthorRequest;
 import com.reinertisa.ubm.service.AuthorService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

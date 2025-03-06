@@ -1,8 +1,8 @@
 package com.reinertisa.ubm.service;
 
-import com.reinertisa.ubm.model.AuthorDto;
-import com.reinertisa.ubm.model.AuthorNameOptions;
-import com.reinertisa.ubm.model.AuthorRequest;
+import com.reinertisa.ubm.dtorequest.dto.AuthorDto;
+import com.reinertisa.ubm.dtorequest.AuthorNameOptions;
+import com.reinertisa.ubm.dtorequest.request.AuthorRequest;
 import jakarta.validation.Valid;
 
 import java.util.List;

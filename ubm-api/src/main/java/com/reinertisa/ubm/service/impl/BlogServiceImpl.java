@@ -1,9 +1,13 @@
-package com.reinertisa.ubm.service;
+package com.reinertisa.ubm.service.impl;
 
+import com.reinertisa.ubm.dtorequest.dto.BlogDto;
+import com.reinertisa.ubm.dtorequest.request.BlogRequest;
 import com.reinertisa.ubm.exception.ResourceNotFoundException;
-import com.reinertisa.ubm.model.*;
+import com.reinertisa.ubm.mapper.BlogMapper;
+import com.reinertisa.ubm.entity.*;
 import com.reinertisa.ubm.repository.AuthorRepository;
 import com.reinertisa.ubm.repository.BlogRepository;
+import com.reinertisa.ubm.service.BlogService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
@@ -31,23 +35,23 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public BlogDto getBlogById(Long id) throws ResourceNotFoundException{
         Objects.requireNonNull(id, "Id should not be null");
-        Blog blog = blogRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Blog not found for this ID: " + id));
+        BlogEntity blogEntity = blogRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("BlogEntity not found for this ID: " + id));
 
-        return blogMapper.toDtoFromEntity(blog);
+        return blogMapper.toDtoFromEntity(blogEntity);
     }
 
     @Override @Transactional
     public BlogDto createBlog(@Valid BlogRequest blogRequest) throws ResourceNotFoundException {
 
-        Author author = authorRepository.findById(blogRequest.getAuthorId())
-                .orElseThrow(() -> new ResourceNotFoundException("Author not found by email"));
+        AuthorEntity authorEntity = authorRepository.findById(blogRequest.getAuthorId())
+                .orElseThrow(() -> new ResourceNotFoundException("AuthorEntity not found by email"));
 
-        Blog blog = blogMapper.toEntityFromRequest(blogRequest);
-        author.addBlog(blog);
-        blog.setAuthor(author);
-        blogRepository.save(blog);
-        return blogMapper.toDtoFromEntity(blog);
+        BlogEntity blogEntity = blogMapper.toEntityFromRequest(blogRequest);
+        authorEntity.addBlog(blogEntity);
+        blogEntity.setAuthor(authorEntity);
+        blogRepository.save(blogEntity);
+        return blogMapper.toDtoFromEntity(blogEntity);
     }
 
     @Override @Transactional

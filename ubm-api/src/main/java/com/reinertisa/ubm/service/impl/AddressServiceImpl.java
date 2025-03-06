@@ -1,10 +1,11 @@
-package com.reinertisa.ubm.service;
+package com.reinertisa.ubm.service.impl;
 
-import com.reinertisa.ubm.model.Address;
-import com.reinertisa.ubm.model.AddressDto;
-import com.reinertisa.ubm.model.AddressMapper;
-import com.reinertisa.ubm.model.AddressRequest;
+import com.reinertisa.ubm.entity.AddressEntity;
+import com.reinertisa.ubm.dtorequest.dto.AddressDto;
+import com.reinertisa.ubm.mapper.AddressMapper;
+import com.reinertisa.ubm.dtorequest.request.AddressRequest;
 import com.reinertisa.ubm.repository.AddressRepository;
+import com.reinertisa.ubm.service.AddressService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +31,9 @@ public class AddressServiceImpl implements AddressService {
     @Override
     @Transactional
     public AddressDto createAddress(AddressRequest addressRequest) {
-        Address address = addressMapper.toEntityFromRequest(addressRequest);
-        addressRepository.save(address);
-        return addressMapper.toDtoFromEntity(address);
+        AddressEntity addressEntity = addressMapper.toEntityFromRequest(addressRequest);
+        addressRepository.save(addressEntity);
+        return addressMapper.toDtoFromEntity(addressEntity);
     }
 
     @Override

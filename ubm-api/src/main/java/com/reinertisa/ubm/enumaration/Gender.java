@@ -1,4 +1,4 @@
-package com.reinertisa.ubm.model;
+package com.reinertisa.ubm.enumaration;
 
 public enum Gender {
     MALE,

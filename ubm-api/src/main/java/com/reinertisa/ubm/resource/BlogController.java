@@ -1,9 +1,9 @@
-package com.reinertisa.ubm.controller;
+package com.reinertisa.ubm.resource;
 
 
 import com.reinertisa.ubm.exception.ResourceNotFoundException;
-import com.reinertisa.ubm.model.BlogDto;
-import com.reinertisa.ubm.model.BlogRequest;
+import com.reinertisa.ubm.dtorequest.dto.BlogDto;
+import com.reinertisa.ubm.dtorequest.request.BlogRequest;
 import com.reinertisa.ubm.service.BlogService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.SortedSet;
 
 
 @RestController

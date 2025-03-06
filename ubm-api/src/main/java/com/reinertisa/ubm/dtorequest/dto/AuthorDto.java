@@ -1,4 +1,6 @@
-package com.reinertisa.ubm.model;
+package com.reinertisa.ubm.dtorequest.dto;
+
+import com.reinertisa.ubm.enumaration.Gender;
 
 import java.time.LocalDate;
 import java.util.SortedSet;

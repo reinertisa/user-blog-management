@@ -1,4 +1,4 @@
-package com.reinertisa.ubm.model;
+package com.reinertisa.ubm.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "addresses")
-public class Address {
+public class AddressEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class Address {
 
     @JsonBackReference
     @OneToOne(
-            targetEntity = Author.class,
+            targetEntity = AuthorEntity.class,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(
             name = "authorId",
@@ -31,7 +31,7 @@ public class Address {
             nullable = false,
             foreignKey = @ForeignKey(name = "Addresses_FK1")
     )
-    private Author author;
+    private AuthorEntity author;
 
     public long getId() {
         return id;
@@ -65,18 +65,18 @@ public class Address {
         this.country = country;
     }
 
-    public Author getAuthor() {
+    public AuthorEntity getAuthor() {
         return author;
     }
 
-    public void setAuthor(Author author) {
+    public void setAuthor(AuthorEntity author) {
         this.author = author;
     }
 
 
     @Override
     public String toString() {
-        return "Address{" +
+        return "AddressEntity{" +
                 "id=" + id +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +

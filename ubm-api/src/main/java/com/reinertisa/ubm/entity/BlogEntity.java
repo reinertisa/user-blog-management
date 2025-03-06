@@ -1,4 +1,4 @@
-package com.reinertisa.ubm.model;
+package com.reinertisa.ubm.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "blogs")
-public class Blog implements Comparable<Blog> {
+public class BlogEntity implements Comparable<BlogEntity> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class Blog implements Comparable<Blog> {
     private String content;
 
     @JsonBackReference
-    @ManyToOne(targetEntity = Author.class,
+    @ManyToOne(targetEntity = AuthorEntity.class,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH},
             fetch = FetchType.LAZY)
     @JoinColumn(
@@ -28,7 +28,7 @@ public class Blog implements Comparable<Blog> {
             nullable = false,
             foreignKey = @ForeignKey(name = "Blogs_FK1")
     )
-    private Author author;
+    private AuthorEntity author;
 
     public Long getId() {
         return id;
@@ -54,17 +54,17 @@ public class Blog implements Comparable<Blog> {
         this.content = content;
     }
 
-    public Author getAuthor() {
+    public AuthorEntity getAuthor() {
         return author;
     }
 
-    public void setAuthor(Author author) {
+    public void setAuthor(AuthorEntity authorEntity) {
         this.author = author;
     }
 
     @Override
     public String toString() {
-        return "Blog{" +
+        return "BlogEntity{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
@@ -73,7 +73,7 @@ public class Blog implements Comparable<Blog> {
     }
 
     @Override
-    public int compareTo(Blog o) {
+    public int compareTo(BlogEntity o) {
         return this.getTitle().compareTo(o.getTitle());
     }
 }
