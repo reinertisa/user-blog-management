@@ -6,11 +6,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "blogs")
-public class BlogEntity implements Comparable<BlogEntity> {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class BlogEntity extends Auditable implements Comparable<BlogEntity> {
 
     @Column(name = "title")
     private String title;
@@ -30,13 +26,6 @@ public class BlogEntity implements Comparable<BlogEntity> {
     )
     private AuthorEntity author;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -65,7 +54,6 @@ public class BlogEntity implements Comparable<BlogEntity> {
     @Override
     public String toString() {
         return "BlogEntity{" +
-                "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", author=" + author +
