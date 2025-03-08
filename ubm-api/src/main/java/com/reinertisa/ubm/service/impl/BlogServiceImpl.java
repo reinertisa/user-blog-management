@@ -1,7 +1,7 @@
 package com.reinertisa.ubm.service.impl;
 
-import com.reinertisa.ubm.dtorequest.dto.BlogDto;
-import com.reinertisa.ubm.dtorequest.request.BlogRequest;
+import com.reinertisa.ubm.dto.Blog;
+import com.reinertisa.ubm.dtorequest.BlogRequest;
 import com.reinertisa.ubm.exception.ResourceNotFoundException;
 import com.reinertisa.ubm.mapper.BlogMapper;
 import com.reinertisa.ubm.entity.*;
@@ -28,12 +28,12 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<BlogDto> getAllBlogs() {
+    public List<Blog> getAllBlogs() {
         return blogMapper.toDtoListFromEntityList(blogRepository.findAll());
     }
 
     @Override
-    public BlogDto getBlogById(Long id) throws ResourceNotFoundException{
+    public Blog getBlogById(Long id) throws ResourceNotFoundException{
         Objects.requireNonNull(id, "Id should not be null");
         BlogEntity blogEntity = blogRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("BlogEntity not found for this ID: " + id));
@@ -42,7 +42,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override @Transactional
-    public BlogDto createBlog(@Valid BlogRequest blogRequest) throws ResourceNotFoundException {
+    public Blog createBlog(@Valid BlogRequest blogRequest) throws ResourceNotFoundException {
 
         AuthorEntity authorEntity = authorRepository.findById(blogRequest.getAuthorId())
                 .orElseThrow(() -> new ResourceNotFoundException("AuthorEntity not found by email"));

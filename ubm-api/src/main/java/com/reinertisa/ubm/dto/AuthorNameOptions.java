@@ -1,4 +1,4 @@
-package com.reinertisa.ubm.dtorequest;
+package com.reinertisa.ubm.dto;
 
 public class AuthorNameOptions {
     private Long value;

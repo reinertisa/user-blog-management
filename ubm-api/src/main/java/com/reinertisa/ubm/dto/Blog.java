@@ -1,7 +1,7 @@
-package com.reinertisa.ubm.dtorequest.dto;
+package com.reinertisa.ubm.dto;
 
 
-public class BlogDto implements Comparable<BlogDto>    {
+public class Blog implements Comparable<Blog>    {
 
     private Long blogId;
     private String title;
@@ -51,7 +51,7 @@ public class BlogDto implements Comparable<BlogDto>    {
 
     @Override
     public String toString() {
-        return "BlogDto{" +
+        return "Blog{" +
                 "blogId=" + blogId +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
@@ -61,7 +61,7 @@ public class BlogDto implements Comparable<BlogDto>    {
     }
 
     @Override
-    public int compareTo(BlogDto o) {
+    public int compareTo(Blog o) {
         return this.blogId.compareTo(o.blogId);
     }
 }

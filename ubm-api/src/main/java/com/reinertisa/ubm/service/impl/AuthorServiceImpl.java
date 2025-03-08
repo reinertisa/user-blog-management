@@ -1,8 +1,8 @@
 package com.reinertisa.ubm.service.impl;
 
-import com.reinertisa.ubm.dtorequest.AuthorNameOptions;
-import com.reinertisa.ubm.dtorequest.dto.AuthorDto;
-import com.reinertisa.ubm.dtorequest.request.AuthorRequest;
+import com.reinertisa.ubm.dto.Author;
+import com.reinertisa.ubm.dto.AuthorNameOptions;
+import com.reinertisa.ubm.dtorequest.AuthorRequest;
 import com.reinertisa.ubm.mapper.AuthorMapper;
 import com.reinertisa.ubm.entity.*;
 import com.reinertisa.ubm.repository.AuthorRepository;
@@ -27,7 +27,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<AuthorDto> getAllAuthors() {
+    public List<Author> getAllAuthors() {
         List<AuthorEntity> authorEntities = authorRepository.findAll();
         return authorMapper.toDtoListFromEntityList(authorEntities);
     }
@@ -48,7 +48,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public AuthorDto createAuthor(@Valid AuthorRequest authorRequest) {
+    public Author createAuthor(@Valid AuthorRequest authorRequest) {
         AuthorEntity authorEntity = authorMapper.toEntityFromRequest(authorRequest);
         authorEntity.setAuthorId(UUID.randomUUID().toString());
         AddressEntity addressEntity = authorEntity.getAddress();

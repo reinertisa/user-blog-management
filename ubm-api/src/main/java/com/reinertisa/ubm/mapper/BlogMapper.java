@@ -1,8 +1,8 @@
 package com.reinertisa.ubm.mapper;
 
 import com.reinertisa.ubm.entity.BlogEntity;
-import com.reinertisa.ubm.dtorequest.dto.BlogDto;
-import com.reinertisa.ubm.dtorequest.request.BlogRequest;
+import com.reinertisa.ubm.dto.Blog;
+import com.reinertisa.ubm.dtorequest.BlogRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -18,7 +18,7 @@ public interface BlogMapper {
             @Mapping(source = ".", target = "authorName", qualifiedByName = "combineNames"),
             @Mapping(source = "author.email", target = "authorEmail")
     })
-    BlogDto toDtoFromEntity(BlogEntity blogEntity);
+    Blog toDtoFromEntity(BlogEntity blogEntity);
 
     @Named("combineNames")
     default String combineNames(BlogEntity blogEntity) {
@@ -28,5 +28,5 @@ public interface BlogMapper {
     @Mapping(source = "blogId", target = "id")
     BlogEntity toEntityFromRequest(BlogRequest blogRequest);
 
-    List<BlogDto> toDtoListFromEntityList(List<BlogEntity> blogEntities);
+    List<Blog> toDtoListFromEntityList(List<BlogEntity> blogEntities);
 }

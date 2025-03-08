@@ -1,19 +1,19 @@
 package com.reinertisa.ubm.service;
 
+import com.reinertisa.ubm.dto.Blog;
 import com.reinertisa.ubm.exception.ResourceNotFoundException;
-import com.reinertisa.ubm.dtorequest.dto.BlogDto;
-import com.reinertisa.ubm.dtorequest.request.BlogRequest;
+import com.reinertisa.ubm.dtorequest.BlogRequest;
 import jakarta.validation.Valid;
 
 import java.util.List;
 
 public interface BlogService {
 
-    List<BlogDto> getAllBlogs();
+    List<Blog> getAllBlogs();
 
-    BlogDto getBlogById(Long id) throws ResourceNotFoundException;
+    Blog getBlogById(Long id) throws ResourceNotFoundException;
 
-    BlogDto createBlog(@Valid BlogRequest blogRequest) throws ResourceNotFoundException;
+    Blog createBlog(@Valid BlogRequest blogRequest) throws ResourceNotFoundException;
 
     void deleteBlog(Long id);
 }

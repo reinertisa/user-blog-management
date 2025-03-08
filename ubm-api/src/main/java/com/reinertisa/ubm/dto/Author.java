@@ -1,13 +1,11 @@
-package com.reinertisa.ubm.dtorequest.dto;
+package com.reinertisa.ubm.dto;
 
 import com.reinertisa.ubm.enumaration.Gender;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.SortedSet;
 
 
-public class AuthorDto {
+public class Author {
 
     private Long id;
     private String firstName;
@@ -17,8 +15,8 @@ public class AuthorDto {
     private Gender gender;
     private Long createdBy;
     private Long updatedBy;
-    private AddressDto addressDto;
-    private SortedSet<BlogDto> blogsDto;
+    private Address address;
+    private SortedSet<Blog> blogsDto;
 
     public Long getId() {
         return id;
@@ -84,25 +82,25 @@ public class AuthorDto {
         this.updatedBy = updatedBy;
     }
 
-    public AddressDto getAddressDto() {
-        return addressDto;
+    public Address getAddressDto() {
+        return address;
     }
 
-    public void setAddressDto(AddressDto addressDto) {
-        this.addressDto = addressDto;
+    public void setAddressDto(Address address) {
+        this.address = address;
     }
 
-    public SortedSet<BlogDto> getBlogsDto() {
+    public SortedSet<Blog> getBlogsDto() {
         return blogsDto;
     }
 
-    public void setBlogsDto(SortedSet<BlogDto> blogsDto) {
+    public void setBlogsDto(SortedSet<Blog> blogsDto) {
         this.blogsDto = blogsDto;
     }
 
     @Override
     public String toString() {
-        return "AuthorDto{" +
+        return "Author{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -111,7 +109,7 @@ public class AuthorDto {
                 ", gender=" + gender +
                 ", createdBy=" + createdBy +
                 ", updatedBy=" + updatedBy +
-                ", addressDto=" + addressDto +
+                ", address=" + address +
                 ", blogsDto=" + blogsDto +
                 '}';
     }

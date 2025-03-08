@@ -1,7 +1,7 @@
 package com.reinertisa.ubm.resource;
 
-import com.reinertisa.ubm.dtorequest.dto.AddressDto;
-import com.reinertisa.ubm.dtorequest.request.AddressRequest;
+import com.reinertisa.ubm.dto.Address;
+import com.reinertisa.ubm.dtorequest.AddressRequest;
 import com.reinertisa.ubm.service.AddressService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +22,9 @@ public class AddressResource {
     }
 
     @GetMapping
-    public ResponseEntity<List<AddressDto>> getAllAddresses() {
+    public ResponseEntity<List<Address>> getAllAddresses() {
         try {
-            List<AddressDto> addresses = addressService.getAllAddresses();
+            List<Address> addresses = addressService.getAllAddresses();
             return ResponseEntity.status(HttpStatus.OK).body(addresses);
         } catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
@@ -32,7 +32,7 @@ public class AddressResource {
     }
 
     @PostMapping
-    public ResponseEntity<AddressDto> createAddress(@RequestBody AddressRequest addressRequest) {
+    public ResponseEntity<Address> createAddress(@RequestBody AddressRequest addressRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(addressService.createAddress(addressRequest));
     }
 

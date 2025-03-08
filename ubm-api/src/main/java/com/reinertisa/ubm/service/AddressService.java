@@ -1,16 +1,16 @@
 package com.reinertisa.ubm.service;
 
-import com.reinertisa.ubm.dtorequest.dto.AddressDto;
-import com.reinertisa.ubm.dtorequest.request.AddressRequest;
+import com.reinertisa.ubm.dto.Address;
+import com.reinertisa.ubm.dtorequest.AddressRequest;
 import jakarta.validation.Valid;
 
 import java.util.List;
 
 public interface AddressService {
 
-    List<AddressDto> getAllAddresses();
+    List<Address> getAllAddresses();
 
-    AddressDto createAddress(@Valid AddressRequest addressRequest);
+    Address createAddress(@Valid AddressRequest addressRequest);
 
     void deleteAddress(Long id);
 

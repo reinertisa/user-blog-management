@@ -1,4 +1,4 @@
-package com.reinertisa.ubm.dtorequest.request;
+package com.reinertisa.ubm.dtorequest;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

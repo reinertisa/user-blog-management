@@ -1,8 +1,8 @@
 package com.reinertisa.ubm.mapper;
 
+import com.reinertisa.ubm.dto.Author;
 import com.reinertisa.ubm.entity.AuthorEntity;
-import com.reinertisa.ubm.dtorequest.dto.AuthorDto;
-import com.reinertisa.ubm.dtorequest.request.AuthorRequest;
+import com.reinertisa.ubm.dtorequest.AuthorRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -13,10 +13,10 @@ public interface AuthorMapper {
 
     @Mapping(source = "address", target = "addressDto")
     @Mapping(source = "blogs", target = "blogsDto")
-    AuthorDto toDtoFromEntity(AuthorEntity authorEntity);
+    Author toDtoFromEntity(AuthorEntity authorEntity);
 
     @Mapping(source = "addressRequest", target="address")
     AuthorEntity toEntityFromRequest(AuthorRequest authorRequest);
 
-    List<AuthorDto> toDtoListFromEntityList(List<AuthorEntity> authorEntities);
+    List<Author> toDtoListFromEntityList(List<AuthorEntity> authorEntities);
 }

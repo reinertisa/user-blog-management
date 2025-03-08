@@ -1,9 +1,9 @@
 package com.reinertisa.ubm.resource;
 
 
+import com.reinertisa.ubm.dto.Blog;
 import com.reinertisa.ubm.exception.ResourceNotFoundException;
-import com.reinertisa.ubm.dtorequest.dto.BlogDto;
-import com.reinertisa.ubm.dtorequest.request.BlogRequest;
+import com.reinertisa.ubm.dtorequest.BlogRequest;
 import com.reinertisa.ubm.service.BlogService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +25,9 @@ public class BlogResource {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<BlogDto>> getAllBlogs() {
+    public ResponseEntity<List<Blog>> getAllBlogs() {
         try {
-            List<BlogDto> blogs = blogService.getAllBlogs();
+            List<Blog> blogs = blogService.getAllBlogs();
             return ResponseEntity.status(HttpStatus.OK).body(blogs);
         } catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
@@ -35,7 +35,7 @@ public class BlogResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BlogDto> getBlogById(@PathVariable("id") Long id) {
+    public ResponseEntity<Blog> getBlogById(@PathVariable("id") Long id) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(blogService.getBlogById(id));
         } catch (ResourceNotFoundException ex) {
@@ -46,7 +46,7 @@ public class BlogResource {
     }
 
     @PostMapping("")
-    public ResponseEntity<BlogDto> createBlog(@RequestBody BlogRequest blogRequest) {
+    public ResponseEntity<Blog> createBlog(@RequestBody BlogRequest blogRequest) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(blogService.createBlog(blogRequest));
         } catch (ResourceNotFoundException ex) {

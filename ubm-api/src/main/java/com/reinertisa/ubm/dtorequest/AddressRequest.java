@@ -1,18 +1,25 @@
-package com.reinertisa.ubm.dtorequest.dto;
+package com.reinertisa.ubm.dtorequest;
 
+import jakarta.validation.constraints.NotBlank;
 
-public class AddressDto {
+public class AddressRequest {
 
-    private long addressId;
+    private Long addressId;
+
+    @NotBlank(message = "This field is required.")
     private String city;
+
+    @NotBlank(message = "This field is required.")
     private String state;
+
+    @NotBlank(message = "This field is required.")
     private String country;
 
-    public long getAddressId() {
+    public Long getAddressId() {
         return addressId;
     }
 
-    public void setAddressId(long addressId) {
+    public void setAddressId(Long addressId) {
         this.addressId = addressId;
     }
 
@@ -38,15 +45,5 @@ public class AddressDto {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    @Override
-    public String toString() {
-        return "AddressDto{" +
-                "addressId=" + addressId +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", country='" + country + '\'' +
-                '}';
     }
 }

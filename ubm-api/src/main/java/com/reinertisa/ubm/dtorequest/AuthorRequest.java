@@ -1,4 +1,4 @@
-package com.reinertisa.ubm.dtorequest.request;
+package com.reinertisa.ubm.dtorequest;
 
 import com.reinertisa.ubm.enumaration.Gender;
 import jakarta.validation.constraints.*;
